@@ -5,3 +5,8 @@
 # Work Files
 
 *.psd
+
+# Visual Studio Code
+
+*.workspace
+.vscode/*
