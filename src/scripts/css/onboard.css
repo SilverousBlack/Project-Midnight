@@ -1,0 +1,14 @@
+@keyframes logout {
+    0%      { background-color: #ff0000; }
+    25%     { background-color: linear-gradient(to right, #ff3300, #ff0000); }
+    50%     { background-color: #ff3300; }
+    75%     { background-color: linear-gradient(to right, #ff0000, #ff3300); }
+    100%    { background-color: #ff0000; } 
+}
+li a.logout:hover:not(.active) {
+    animation-name: logout;
+    animation-duration: 2.5s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+    color: #ffffff;
+}

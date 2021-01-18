@@ -1,0 +1,140 @@
+@font-face {
+    font-family: HeaderFont;
+    src: url("../../resources/fonts/HeaderFont.ttf") format("truetype");
+}
+@font-face {
+    font-family: BodyFont;
+    src: url("../../resources/fonts/BodyFont.ttf") format("truetype");
+}
+@keyframes bg-wave {
+    0%      { background-color: #e0e0e0; }
+    25%     { background-color: linear-gradient(to right, #8f8f8f, #e0e0e0); }
+    50%     { background-color: #8f8f8f; }
+    75%     { background-color: linear-gradient(to right, #e0e0e0, #8f8f8f); }
+    100%    { background-color: #e0e0e0; } 
+}
+@keyframes banner {
+    0%      { opacity: 0.75; }
+    50%     { opacity: 1.00; }
+    100%    { opacity: 0.75; }
+}
+@keyframes hover {
+    0%      { background-color: #555 }
+    50%     { background-color: linear-gradient(to right, #0056d8, #555) }
+    100%    { background-color: #0056d8; }
+}
+html {
+    display: table;
+    margin: auto;
+    max-width: 1440px;
+    animation-name: bg-wave;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+body {
+    padding-top: 2.5%;
+    margin: auto;
+    max-width: 100%;
+}
+br {
+    height: 0%;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    max-width: 15%;
+    background-color: #f1f1f1;
+    position: fixed;
+    top: 2.5%;
+    left: 2.5%;
+    height: auto;
+    overflow: auto;
+}
+li a{
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+    font-family: HeaderFont;
+    font-size: 16px;
+    height: auto;
+}
+li a.active {
+    background-color: #0056d8;
+    color: #ffffff;
+}
+li a:hover:not(.active) {
+    animation-name: hover;
+    animation-duration: 2.5s;
+    animation-delay: 1s;
+    animation-fill-mode: both;
+    color: #ffffff;
+    box-shadow: 0px 20px 50px #8f8f8f;
+}
+div.general {
+    max-width: 100%;
+    position: absolute;
+    left: 17.5%;
+    min-width: 65%;
+}
+div.content {
+    min-width: 100%;
+    padding: 16px 16px;
+    height: auto;
+    background-color: #ddd;
+    color: #222;
+    text-align: justify;
+    text-justify: inter-word;
+    font-family: HeaderFont;
+}
+img.banner {
+    max-width: 100%;
+    height: auto;
+    animation-name: banner;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+p {
+    height: auto;
+    font-family: BodyFont;
+}
+p.success {
+    color: #00ce00;
+}
+p.notice {
+    color: #0056d8;
+}
+p.warning {
+    color: #b39431;
+}
+p.error {
+    color: #d40000;
+}
+input[type=text], input[type=password], input[type=number] {
+    min-width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+button.login {
+    font-family: HeaderFont;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #222;
+    padding: 5px 10px;
+    border: 0;
+    box-shadow: none;
+}
+button.login:hover {
+    background-color: #0056d8;
+}
+label {
+    display: inline-block;
+    text-align: left;
+    font-size: 16px;
+    font-family: BodyFont;
+    font-weight: bold;
+}
