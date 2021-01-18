@@ -91,7 +91,6 @@
             <li><a href="live.php">Live Cipher</a></li>
             <?php
                 if ($_SESSION["luas"] == 1){
-                    echo "<li><a href=registry.php>Manage Registry</a></li>";
                     echo "<li><a href=db.php>Database Server</a></li>";
                 }
             ?>
