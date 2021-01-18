@@ -1,3 +1,7 @@
 # Work Arounds
 
 *.bat
+
+# Work Files
+
+*.psd
