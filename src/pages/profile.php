@@ -1,5 +1,8 @@
 <?php
+    session_start();
     include_once("../.sys/logic/session.php");
+    pageloadProtocol();
+    timeoutProtocol();
     if (isset($_POST["unc"])){
         $localresults = retrieveMatches();
         $uname = $_POST["uname"];
@@ -67,6 +70,7 @@
         unset($_POST["secc"]);
     }
     unset($_POST);
+    pageendProtocol();
 ?>
 <!DOCTYPE html>
 <html>
@@ -91,7 +95,7 @@
             <li><a href="live.php">Live Cipher</a></li>
             <?php
                 if ($_SESSION["luas"] == 1){
-                    echo "<li><a href=db.php>Database Server</a></li>";
+                    echo "<li><a class='adminoff' href=db.php>Database Server</a></li>";
                 }
             ?>
             <li><a href="../.sys/logic/logout.php" class="logout">Log Out</a></li>
@@ -101,7 +105,7 @@
         </ul>
         <div class="general">
             <div class="content">
-                <h1>Manage Profile</h1>
+                <h1>Profile Management</h1>
                 <p>Hi <b><?php echo $_SESSION["uname"]; ?></b>! You can change usernames, passwords and others here!</p>
                 <hr>
                 <h2>User Name</h2>

@@ -1,5 +1,8 @@
 <?php
+    session_start();
     include_once("../.sys/logic/session.php");
+    $error_uname = "";
+    $error_pword = "";
     if (isset($_POST["uname"])){
         $pings = retrieveMatches();
         if (!(is_null($pings))){
@@ -26,6 +29,7 @@
         }
     }
     unset($_POST);
+    pageendProtocol();
 ?>
 <!DOCTYPE html>
 <html>
@@ -75,13 +79,13 @@
                     <br>
                     <label for="secq">Security Question</label>
                     <br>
-                    <input type="text" placeholder="Security Question" name="secq" style="width = 100%">
+                    <input type="text" placeholder="Security Question" name="secq" style="width: 100%">
                     <br>
                     <p class="notice">The security question [optional] would be used later to retrieve your log in credentials in case they are lost.</p>
                     <br>
                     <label for="seca">Security Question Answer</label>
                     <br>
-                    <input type="text" placeholder="Security Answer" name="seca" style="width = 100%">
+                    <input type="text" placeholder="Security Answer" name="seca" style="width: 100%">
                     <br>
                     <p class="notice">Take note of your security question and answer! Both must match to retrieve an account.</p>
                     <br>

@@ -45,10 +45,7 @@
         $ret = array($uent, $sent);
         return $ret;
     }
-    function logoutProtocol(){
-        global $dbconfig;
-        mysqli_close($dbconfig);
-        unset($_POST);
-        unset($_SESSION);
+    function alert(string $msg){
+        echo "<script type='text/javascript'>alert('{$msg}')</script>";
     }
 ?>

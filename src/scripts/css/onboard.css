@@ -5,10 +5,55 @@
     75%     { background-color: linear-gradient(to right, #ff0000, #ff3300); }
     100%    { background-color: #ff0000; } 
 }
+@keyframes adminoff {
+    0%      { background-color: #cfb53b; }
+    25%     { background-color: linear-gradient(to right, #d4af37, #cfb53b); }
+    50%     { background-color: #d4af37; }
+    75%     { background-color: linear-gradient(to right, #cfb53b, #d4af37); }
+    100%    { background-color: #cfb53b; }
+}
+@keyframes adminon {
+    0%      { background-color: #996515; }
+    25%     { background-color: radial-gradient(to right, #996515, #0056d8); }
+    50%     { background-color: #0056d8;}
+    75%     { background-color: radial-gradient(to right, #0056d8, #996515); }
+    100%    { background-color: #996515; }
+}
+li a.adminon {
+    animation-name: adminon;
+    animation-duration: 5s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+    color: #ffffff;
+}
+li a.adminoff:hover:not(.active) {
+    animation-name: adminoff;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+    color: #ffffff;
+}
 li a.logout:hover:not(.active) {
     animation-name: logout;
     animation-duration: 2.5s;
     animation-fill-mode: both;
     animation-iteration-count: infinite;
     color: #ffffff;
+}
+table {
+    min-width: 100%;
+    padding: 5px 5px 2px 2px;
+    border-top: 2px solid #000000;
+    border-left: 2px solid #000000;
+}
+td, th {
+    padding: 5px 5px 5px 5px;
+    border-bottom: 2px solid #000000;
+    border-right: 2px solid #000000;
+}
+td {
+    text-align: right;
+}
+th {
+    text-align: center;
 }

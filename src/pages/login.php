@@ -1,5 +1,8 @@
 <?php
+    session_start();
     include_once("../.sys/logic/session.php");
+    $error_uname = "";
+    $error_pword = "";
     if (isset($_POST["uname"])) {
         $localResults;
         try {    
@@ -22,8 +25,10 @@
                 $_SESSION["lusr"] = $localResults["NAME"];
                 $_SESSION["luid"] = $localResults["ID"];
                 $_SESSION["luas"] = $localResults["ASTAT"];
+                $_SESSION["lact"] = hrtime(true);
                 unset($_POST["psw"]);
                 header("Location: profile.php", true, 301);
+                exit();
             }
             else {
                 global $error_pword;
@@ -33,6 +38,7 @@
         }
     }
     unset($_POST);
+    pageendProtocol();
 ?>
 <!DOCTYPE html>
 <html>
@@ -88,3 +94,9 @@
         </div>
     </body>
 </html>
+<?php
+    if (isset($_SESSION["alert"])){
+        alert($_SESSION["alert"]);
+        unset($_SESSION["alert"]);
+    }
+?>

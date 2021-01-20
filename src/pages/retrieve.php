@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include_once("../.sys/logic/session.php");
     if (isset($_POST["ret"])){
         $retrieve_stat = true;
@@ -37,6 +38,7 @@
         }
     }
     unset($_POST);
+    pageendProtocol();
 ?>
 <!DOCTYPE html>
 <html>
@@ -98,9 +100,9 @@
                             echo "<p class=warning>Quickly take note of your credentials. We are not liable for any leak of information.</p>";
                             echo "<form>";
                             echo "<label>User Name</label><br>";
-                            echo "<input type=text type=value value={$ret_uname} readonly><br>";
+                            echo "<input type=text type=value value='{$ret_uname}' readonly><br>";
                             echo "<label>Password</label><br>";
-                            echo "<input type=text value={$ret_pword} readonly>";
+                            echo "<input type=text value='{$ret_pword}' readonly>";
                             unset($retrive_stat);
                         }
                     }
