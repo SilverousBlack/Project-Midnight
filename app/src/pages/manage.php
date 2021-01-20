@@ -10,7 +10,7 @@
     <head>
         <meta author="Silverous Black">
         <meta charset="utf-8">
-        <meta summary="Manage Profile page of Project Midnight. Project Midnight is a part of Enthereon Cipher Projects by S. Black, and is a predecessor of Project Eclipse. Read license notice for information on copyrights.">
+        <meta summary="Cipher Management page of Project Midnight. Project Midnight is a part of Enthereon Cipher Projects by S. Black, and is a predecessor of Project Eclipse. Read license notice for information on copyrights.">
         <title>Midnight: Log In</title>
         <link rel="icon" type="images/png" sizes="256x256" href="../resources/images/icon-256.png">
         <link rel="icon" type="images/png" sizes="128x128" href="../resources/images/icon-128.png">
@@ -24,8 +24,8 @@
         <ul>
             <img class="banner" src="../resources/images/banner logo medium.png" alt="Project Midnight Banner Logo Medium">
             <li><a href="profile.php">Manage Profile</a></li>
-            <li><a href="manage.php">Manage Ciphers</a></li>
-            <li><a class="active" href="">Live Cipher</a></li>
+            <li><a class="active" href="">Manage Ciphers</a></li>
+            <li><a href="live.php">Live Cipher</a></li>
             <?php
                 if ($_SESSION["luas"] == 1){
                     echo "<li><a class='adminoff' href=db.php>Database Server</a></li>";
@@ -38,7 +38,7 @@
         </ul>
         <div class="general">
             <div class="content">
-                <h1>Live Cipher Engine<h2>
+                <h1>Cipher Management<h2>
             </div>
         </div>
     </body>

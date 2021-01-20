@@ -61,7 +61,7 @@
     <head>
         <meta author="Silverous Black">
         <meta charset="utf-8">
-        <meta summary="Manage Profile page of Project Midnight. Project Midnight is a part of Enthereon Cipher Projects by S. Black, and is a predecessor of Project Eclipse. Read license notice for information on copyrights.">
+        <meta summary="Database Server page of Project Midnight. Project Midnight is a part of Enthereon Cipher Projects by S. Black, and is a predecessor of Project Eclipse. Read license notice for information on copyrights.">
         <title>Midnight: Log In</title>
         <link rel="icon" type="images/png" sizes="256x256" href="../resources/images/icon-256.png">
         <link rel="icon" type="images/png" sizes="128x128" href="../resources/images/icon-128.png">

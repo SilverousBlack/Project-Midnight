@@ -138,3 +138,8 @@ label {
     font-family: BodyFont;
     font-weight: bold;
 }
+input[type=radio]{
+    display: inline-flex;
+    position: relative;
+    margin: auto;
+}
