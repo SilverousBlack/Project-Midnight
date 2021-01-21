@@ -1,6 +1,7 @@
 <?php
     session_start();
     include_once("../.sys/logic/session.php");
+    accessProtocol();
     $error_uname = "";
     $error_pword = "";
     if (isset($_POST["uname"])) {
@@ -94,9 +95,3 @@
         </div>
     </body>
 </html>
-<?php
-    if (isset($_SESSION["alert"])){
-        alert($_SESSION["alert"]);
-        unset($_SESSION["alert"]);
-    }
-?>

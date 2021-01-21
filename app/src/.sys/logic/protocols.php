@@ -42,6 +42,12 @@
             header("Location: login.php", true, 301);
         }
     }
+    function accessProtocol(){
+        if (isset($_SESSION["alert"])){
+            alert($_SESSION["alert"]);
+            unset($_SESSION["alert"]);
+        }
+    }
     function pageendProtocol(){
         $_SESSION["lact"] = hrtime(true);
     }

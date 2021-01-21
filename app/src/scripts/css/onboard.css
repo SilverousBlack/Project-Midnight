@@ -26,6 +26,13 @@ li a.adminon {
     animation-iteration-count: infinite;
     color: #ffffff;
 }
+li a.adminon:hover {
+    animation-name: adminon;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: once;
+    color: #ffffff; 
+}
 li a.adminoff:hover:not(.active) {
     animation-name: adminoff;
     animation-duration: 2s;
