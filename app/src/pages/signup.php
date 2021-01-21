@@ -10,7 +10,10 @@
             $error_uname = "Username [{$uname}] already exists in database! Consider changing.";
         }
         else {
-            if (!(verifyPassWord($_POST["psw"]))){
+            if (strlen($_POST["uname"]) > 20){
+                $error_uname = "Username must be a maximum of 20 characters";
+            }
+            elseif (!(verifyPassWord($_POST["psw"]))){
                 $error_pword = "Password must be at least 8 characters and at most 20 characters.";
             }
             else {
