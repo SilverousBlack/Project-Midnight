@@ -18,11 +18,13 @@ This document shows the documentation of Project Midnight.
 
 - [Documentation](#documentation)
   - [Table of Contents](#table-of-contents)
-  - [0.0 Filesystem](#00-filesystem)
-  - [0.1 Repository Information](#01-repository-information)
-  - [0.2 Version Information](#02-version-information)
-  - [0.3 Licenses](#03-licenses)
-  - [0.4 Developer Notes](#04-developer-notes)
+  - [0.0 Meta Information](#00-meta-information)
+    - [0.1 Filesystem](#01-filesystem)
+    - [0.2 Repository Information](#02-repository-information)
+    - [0.3 Version Information](#03-version-information)
+    - [0.4 Licenses](#04-licenses)
+    - [0.5 Developer Notes](#05-developer-notes)
+    - [0.6 Development Status](#06-development-status)
   - [1.0 Source files and Code Works](#10-source-files-and-code-works)
     - [1.1 `db_config.php`](#11-db_configphp)
     - [1.2 `requiries.php`](#12-requiriesphp)
@@ -50,8 +52,14 @@ This document shows the documentation of Project Midnight.
     - [2.10 Database Server Page [Local]](#210-database-server-page-local)
     - [2.11 Database Server Page [Admin]](#211-database-server-page-admin)
     - [2.12 Database Structure](#212-database-structure)
+  - [3.0 System Design](#30-system-design)
+    - [3.1 Entity Relationship Diagram](#31-entity-relationship-diagram)
+    - [3.2 ID Characterics and Symbolic Cipher Process](#32-id-characterics-and-symbolic-cipher-process)
+    - [3.3 Data Flow Diagram (Level 0)](#33-data-flow-diagram-level-0)
 
-## 0.0 Filesystem
+## 0.0 Meta Information
+
+### 0.1 Filesystem
 
 This represents the filesystem of Project Midnight. Refer to this section for information on how locations.
 
@@ -66,6 +74,8 @@ This represents the filesystem of Project Midnight. Refer to this section for in
 |   |   |   +---> index.md
 |   |   |   +---> index.pdf
 |   |   |   +---> OFL.txt
+|   |   +---+ System Design
+|   |   |   +---> ... <system design files> ...
 |   |   +---> Enthereon Cipher Projects.md
 |   |   +---> Enthereon Cipher Projects.pdf
 |   |   +---> LICENSE
@@ -119,7 +129,7 @@ This represents the filesystem of Project Midnight. Refer to this section for in
 +---> README.md
 ```
 
-## 0.1 Repository Information
+### 0.2 Repository Information
 
 - Author: [@SilverousBlack](github.com/SilverousBlack)
 - Repository Host: [GitHub](github.com)
@@ -128,12 +138,12 @@ This represents the filesystem of Project Midnight. Refer to this section for in
 - Repository Version: 0.0.2
 - License: [Enthereon Cipher Projects General License](../../../LICENSE)
 
-## 0.2 Version Information
+### 0.3 Version Information
 
 - 0.0.1 - Repository Launch with Log In and Sign Up capabilities
 - 0.0.2 - System Timeouts, Administrator-only Control
 
-## 0.3 Licenses
+### 0.4 Licenses
 
 This Software licensed with a **Enthereon Cipher Projects General License**.
 
@@ -289,7 +299,7 @@ FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
 OTHER DEALINGS IN THE FONT SOFTWARE.
 ```
 
-## 0.4 Developer Notes
+### 0.5 Developer Notes
 
 - Due to XAMPP not properly working (installation problems).
   - PHP workaround is made through a seprate installation of PHP and Windows Batch Scripts.
@@ -297,7 +307,19 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   - `launchsys.bat` launches Microsoft Edge (developer choice browser) new window with the system running at `localhost:8080`.
 - By nature of the web application, `profile.php` or the *Profile Management Page* is considered as the *home page*.
 - A new MySQL user is created and used by Project Midnight by default.
-- This document and other documents are written in Markdown, and exported to Portable Document Format (PDF) thereunto.
+- This document and other documents are written in Markdown, and exported to Portable Document Format (PDF) thereunto. Exporting to PDF is done through an [extension](https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf).
+
+### 0.6 Development Status
+
+- 2020 December 23 - System designed **[0.0.0]**.
+- 2021 January 8 - Development Started **[0.0.0]**.
+- 2021 January 9 - Database set up, including default user **[0.0.1]**.
+- 2021 January 12 - Log In/Sign Up pages developed **[0.0.1]**.
+- 2021 January 16 - Administrator rights implemented **[0.0.1]**.
+- 2021 January 19 - Repository launched **[0.0.1]**.
+- 2021 January 20 - Protocols implemented **[0.0.2]**.
+- *2021 January 22* - First Packaging attempt, and submission **[0.0.2]**.
+- *2021 February 4* - Open Launch **[1.0.0]**.
 
 ## 1.0 Source files and Code Works
 
@@ -420,6 +442,12 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
             header("Location: login.php", true, 301);
         }
     }
+    function accessProtocol(){
+        if (isset($_SESSION["alert"])){
+            alert($_SESSION["alert"]);
+            unset($_SESSION["alert"]);
+        }
+    }
     function pageendProtocol(){
         $_SESSION["lact"] = hrtime(true);
     }
@@ -526,6 +554,7 @@ INSERT INTO SECURITY(QUE, ANS, UID) VALUES ("What is the crystal latice of Enthe
 <?php
     session_start();
     include_once("../.sys/logic/session.php");
+    accessProtocol();
     $error_uname = "";
     $error_pword = "";
     if (isset($_POST["uname"])) {
@@ -548,7 +577,7 @@ INSERT INTO SECURITY(QUE, ANS, UID) VALUES ("What is the crystal latice of Enthe
                 $user = getUserName($localResults["NAME"], $localResults["ID"], $localResults["ASTAT"]);
                 $_SESSION["uname"] = $user;
                 $_SESSION["lusr"] = $localResults["NAME"];
-                $_SESSION["luid"] = $localResults["ID"];
+                $_SESSION["luid"] = $localResults["ID"] + 0;
                 $_SESSION["luas"] = $localResults["ASTAT"];
                 $_SESSION["lact"] = hrtime(true);
                 unset($_POST["psw"]);
@@ -586,7 +615,7 @@ INSERT INTO SECURITY(QUE, ANS, UID) VALUES ("What is the crystal latice of Enthe
             <li><a href="signup.php">Sign Up</a></li>
             <li><a href="../../docs/Enthereon Cipher Projects.pdf">About: Enthereon Cipher Projects</a></li>
             <li><a href="../../docs/Project Midnight.pdf">About: Project Midnight</a></li>
-            <li><a href="../../LICENSE">License</a></li>
+            <li><a href="../../docs/LICENSE">License</a></li>
         </ul>
         <div class="general">
             <div class="content">
@@ -619,12 +648,6 @@ INSERT INTO SECURITY(QUE, ANS, UID) VALUES ("What is the crystal latice of Enthe
         </div>
     </body>
 </html>
-<?php
-    if (isset($_SESSION["alert"])){
-        alert($_SESSION["alert"]);
-        unset($_SESSION["alert"]);
-    }
-?>
 ```
 
 ### 1.8 `signup.php`
@@ -642,7 +665,10 @@ INSERT INTO SECURITY(QUE, ANS, UID) VALUES ("What is the crystal latice of Enthe
             $error_uname = "Username [{$uname}] already exists in database! Consider changing.";
         }
         else {
-            if (!(verifyPassWord($_POST["psw"]))){
+            if (strlen($_POST["uname"]) > 20){
+                $error_uname = "Username must be a maximum of 20 characters";
+            }
+            elseif (!(verifyPassWord($_POST["psw"]))){
                 $error_pword = "Password must be at least 8 characters and at most 20 characters.";
             }
             else {
@@ -684,7 +710,7 @@ INSERT INTO SECURITY(QUE, ANS, UID) VALUES ("What is the crystal latice of Enthe
             <li><a class="active" href="">Sign Up</a></li>
             <li><a href="../../docs/Enthereon Cipher Projects.pdf">About: Enthereon Cipher Projects</a></li>
             <li><a href="../../docs/Project Midnight.pdf">About: Project Midnight</a></li>
-            <li><a href="../../LICENSE">License</a></li>
+            <li><a href="../../docs/LICENSE">License</a></li>
         </ul>
         <div class="general">
             <div class="content">
@@ -800,7 +826,7 @@ INSERT INTO SECURITY(QUE, ANS, UID) VALUES ("What is the crystal latice of Enthe
             <li><a href="signup.php">Sign Up</a></li>
             <li><a href="../../docs/Enthereon Cipher Projects.pdf">About: Enthereon Cipher Projects</a></li>
             <li><a href="../../docs/Project Midnight.pdf">About: Project Midnight</a></li>
-            <li><a href="../../LICENSE">License</a></li>
+            <li><a href="../../docs/LICENSE">License</a></li>
         </ul>
         <div class="general">
             <div class="content">
@@ -934,7 +960,7 @@ INSERT INTO SECURITY(QUE, ANS, UID) VALUES ("What is the crystal latice of Enthe
     <head>
         <meta author="Silverous Black">
         <meta charset="utf-8">
-        <meta summary="Manage Profile page of Project Midnight. Project Midnight is a part of Enthereon Cipher Projects by S. Black, and is a predecessor of Project Eclipse. Read license notice for information on copyrights.">
+        <meta summary="Profile Management page of Project Midnight. Project Midnight is a part of Enthereon Cipher Projects by S. Black, and is a predecessor of Project Eclipse. Read license notice for information on copyrights.">
         <title>Midnight: Log In</title>
         <link rel="icon" type="images/png" sizes="256x256" href="../resources/images/icon-256.png">
         <link rel="icon" type="images/png" sizes="128x128" href="../resources/images/icon-128.png">
@@ -958,7 +984,7 @@ INSERT INTO SECURITY(QUE, ANS, UID) VALUES ("What is the crystal latice of Enthe
             <li><a href="../.sys/logic/logout.php" class="logout">Log Out</a></li>
             <li><a href="../../docs/Enthereon Cipher Projects.pdf">About: Enthereon Cipher Projects</a></li>
             <li><a href="../../docs/Project Midnight.pdf">About: Project Midnight</a></li>
-            <li><a href="../../LICENSE">License</a></li>
+            <li><a href="../../docs/LICENSE">License</a></li>
         </ul>
         <div class="general">
             <div class="content">
@@ -1062,6 +1088,36 @@ INSERT INTO SECURITY(QUE, ANS, UID) VALUES ("What is the crystal latice of Enthe
     include_once("../.sys/logic/session.php");
     pageloadProtocol();
     timeoutProtocol();
+    alert("Page Under Construction: This page is still in development, all/multiple functionalities may be missing.");
+    $luid = $_SESSION["luid"] + 0;
+    $result = mysqli_query($dbconfig,
+    "SELECT *
+    FROM CIPHER
+    WHERE UID={$luid}")
+    or die("Database Error: " . mysqli_error($dbconfig));
+    $copy = $result;
+    $total = 0;
+    $counter = 0;
+    while($rows = mysqli_fetch_assoc($result)){
+        $total += 1;
+        $counter = $rows["ID"] + 0;
+    }
+    if (isset($_POST["ncn"])){
+        $lcin = "'" . $_POST . "'";
+        $lcid = ($luid * 1000) + $counter;
+        $result = mysqli_query($dbconfig,
+        "INSERT INTO
+        CIPHER(ID, NAME, UID)
+        VALUES ({$lcid}, {$lcin}, {$luid});")
+        or die("Database Error" . mysqli_error($dbconfig));
+    }
+    if (isset($_POST["ccn"])){
+
+    }
+    else {
+        $options = "";
+
+    }
     pageendProtocol();
 ?>
 <!DOCTYPE html>
@@ -1069,7 +1125,7 @@ INSERT INTO SECURITY(QUE, ANS, UID) VALUES ("What is the crystal latice of Enthe
     <head>
         <meta author="Silverous Black">
         <meta charset="utf-8">
-        <meta summary="Manage Profile page of Project Midnight. Project Midnight is a part of Enthereon Cipher Projects by S. Black, and is a predecessor of Project Eclipse. Read license notice for information on copyrights.">
+        <meta summary="Cipher Management page of Project Midnight. Project Midnight is a part of Enthereon Cipher Projects by S. Black, and is a predecessor of Project Eclipse. Read license notice for information on copyrights.">
         <title>Midnight: Log In</title>
         <link rel="icon" type="images/png" sizes="256x256" href="../resources/images/icon-256.png">
         <link rel="icon" type="images/png" sizes="128x128" href="../resources/images/icon-128.png">
@@ -1093,11 +1149,45 @@ INSERT INTO SECURITY(QUE, ANS, UID) VALUES ("What is the crystal latice of Enthe
             <li><a href="../.sys/logic/logout.php" class="logout">Log Out</a></li>
             <li><a href="../../docs/Enthereon Cipher Projects.pdf">About: Enthereon Cipher Projects</a></li>
             <li><a href="../../docs/Project Midnight.pdf">About: Project Midnight</a></li>
-            <li><a href="../../LICENSE">License</a></li>
+            <li><a href="../../docs/LICENSE">License</a></li>
         </ul>
         <div class="general">
             <div class="content">
                 <h1>Cipher Management<h2>
+                <p>Manage your ciphers here!</p>
+                <hr>
+                <h2>Create New Cipher<h2>
+                <form method="POST" action="">
+                    <input type="hidden" name="cnp">
+                    <label for="ncn">New Cipher Name</label>
+                    <br>
+                    <input type="text" name="ncn" placeholder="Cipher Name" required>
+                    <button type="submit" class="login">&rArr;</button>
+                    <?php
+                        if(isset($error_ncn)){
+                            echo "<br><p class='error'>{$ncn}</p>";
+                        }
+                    ?>
+                </form>
+                <hr>
+                <h2>Configure Cipher</h2>
+                <p>Select a ciphher &rArr; Select a configuration method &rArr; Do configuration</p>
+                <form>
+                    <label for="ccn">Cipher Name</label>
+                    <br>
+                    <?php
+                        if(isset($cur_cipher)){
+                            echo "<input type='text' name='ccn' value='{$cur_cipher}' readonly>";
+                        }
+                        else {
+                            echo "<select name='ccn' required>";
+                            echo $options;
+                            echo "</select>";
+                            echo "<button type='submit' class='login'>&rArr;</button>\n";
+                        }
+                    ?>
+                    <br>
+                </form>
             </div>
         </div>
     </body>
@@ -1112,6 +1202,7 @@ INSERT INTO SECURITY(QUE, ANS, UID) VALUES ("What is the crystal latice of Enthe
     include_once("../.sys/logic/session.php");
     pageloadProtocol();
     timeoutProtocol();
+    alert("Page Under Construction: This page is still in development, all/multiple functionalities may be missing.");
     pageendProtocol();
 ?>
 <!DOCTYPE html>
@@ -1119,7 +1210,7 @@ INSERT INTO SECURITY(QUE, ANS, UID) VALUES ("What is the crystal latice of Enthe
     <head>
         <meta author="Silverous Black">
         <meta charset="utf-8">
-        <meta summary="Manage Profile page of Project Midnight. Project Midnight is a part of Enthereon Cipher Projects by S. Black, and is a predecessor of Project Eclipse. Read license notice for information on copyrights.">
+        <meta summary="Live Cipher Engine page of Project Midnight. Project Midnight is a part of Enthereon Cipher Projects by S. Black, and is a predecessor of Project Eclipse. Read license notice for information on copyrights.">
         <title>Midnight: Log In</title>
         <link rel="icon" type="images/png" sizes="256x256" href="../resources/images/icon-256.png">
         <link rel="icon" type="images/png" sizes="128x128" href="../resources/images/icon-128.png">
@@ -1143,7 +1234,7 @@ INSERT INTO SECURITY(QUE, ANS, UID) VALUES ("What is the crystal latice of Enthe
             <li><a href="../.sys/logic/logout.php" class="logout">Log Out</a></li>
             <li><a href="../../docs/Enthereon Cipher Projects.pdf">About: Enthereon Cipher Projects</a></li>
             <li><a href="../../docs/Project Midnight.pdf">About: Project Midnight</a></li>
-            <li><a href="../../LICENSE">License</a></li>
+            <li><a href="../../docs/LICENSE">License</a></li>
         </ul>
         <div class="general">
             <div class="content">
@@ -1220,7 +1311,7 @@ INSERT INTO SECURITY(QUE, ANS, UID) VALUES ("What is the crystal latice of Enthe
     <head>
         <meta author="Silverous Black">
         <meta charset="utf-8">
-        <meta summary="Manage Profile page of Project Midnight. Project Midnight is a part of Enthereon Cipher Projects by S. Black, and is a predecessor of Project Eclipse. Read license notice for information on copyrights.">
+        <meta summary="Database Server page of Project Midnight. Project Midnight is a part of Enthereon Cipher Projects by S. Black, and is a predecessor of Project Eclipse. Read license notice for information on copyrights.">
         <title>Midnight: Log In</title>
         <link rel="icon" type="images/png" sizes="256x256" href="../resources/images/icon-256.png">
         <link rel="icon" type="images/png" sizes="128x128" href="../resources/images/icon-128.png">
@@ -1244,7 +1335,7 @@ INSERT INTO SECURITY(QUE, ANS, UID) VALUES ("What is the crystal latice of Enthe
             <li><a href="../.sys/logic/logout.php" class="logout">Log Out</a></li>
             <li><a href="../../docs/Enthereon Cipher Projects.pdf">About: Enthereon Cipher Projects</a></li>
             <li><a href="../../docs/Project Midnight.pdf">About: Project Midnight</a></li>
-            <li><a href="../../LICENSE">License</a></li>
+            <li><a href="../../docs/LICENSE">License</a></li>
         </ul>
         <div class="general">
             <div class="content">
@@ -1255,7 +1346,7 @@ INSERT INTO SECURITY(QUE, ANS, UID) VALUES ("What is the crystal latice of Enthe
                     <label for="query">Query</label>
                     <br>
                     <input type="text" name="query" placeholder="Database Query" required>
-                    <button type="submit" class="login">&rarr;</button>
+                    <button type="submit" class="login">&rArr;</button>
                 </form>
                 <?php
                     if(isset($to_print)){
@@ -1318,3 +1409,17 @@ INSERT INTO SECURITY(QUE, ANS, UID) VALUES ("What is the crystal latice of Enthe
 ### 2.12 Database Structure
 
 ![Database Elements](Database%20Elements.png)
+
+## 3.0 System Design
+
+### 3.1 Entity Relationship Diagram
+
+![ERD](../System%20Design/M-SD-01.png)
+
+### 3.2 ID Characterics and Symbolic Cipher Process
+
+![ID Characteristics](../System%20Design/M-SD-02A.png)
+
+### 3.3 Data Flow Diagram (Level 0)
+
+![DFD0](../System%20Design/M-SD-03G.png)

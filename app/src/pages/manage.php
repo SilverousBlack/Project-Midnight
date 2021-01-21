@@ -3,6 +3,7 @@
     include_once("../.sys/logic/session.php");
     pageloadProtocol();
     timeoutProtocol();
+    alert("Page Under Construction: This page is still in development, all/multiple functionalities may be missing.");
     $luid = $_SESSION["luid"] + 0;
     $result = mysqli_query($dbconfig,
     "SELECT *
