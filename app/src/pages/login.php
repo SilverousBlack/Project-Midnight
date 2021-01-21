@@ -24,7 +24,7 @@
                 $user = getUserName($localResults["NAME"], $localResults["ID"], $localResults["ASTAT"]);
                 $_SESSION["uname"] = $user;
                 $_SESSION["lusr"] = $localResults["NAME"];
-                $_SESSION["luid"] = $localResults["ID"];
+                $_SESSION["luid"] = $localResults["ID"] + 0;
                 $_SESSION["luas"] = $localResults["ASTAT"];
                 $_SESSION["lact"] = hrtime(true);
                 unset($_POST["psw"]);
