@@ -119,6 +119,26 @@ input[type=text], input[type=password], input[type=number] {
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
+select {
+    min-width: 25%;
+    width: auto;
+    height: auto;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+option {
+    min-width: 25%;
+    padding: 12px 20px;
+    width: auto;
+    height: auto;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
 button.login {
     font-family: HeaderFont;
     font-size: 16px;
@@ -137,9 +157,4 @@ label {
     font-size: 16px;
     font-family: BodyFont;
     font-weight: bold;
-}
-input[type=radio]{
-    display: inline-flex;
-    position: relative;
-    margin: auto;
 }

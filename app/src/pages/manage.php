@@ -3,6 +3,35 @@
     include_once("../.sys/logic/session.php");
     pageloadProtocol();
     timeoutProtocol();
+    $luid = $_SESSION["luid"] + 0;
+    $result = mysqli_query($dbconfig,
+    "SELECT *
+    FROM CIPHER
+    WHERE UID={$luid}")
+    or die("Database Error: " . mysqli_error($dbconfig));
+    $copy = $result;
+    $total = 0;
+    $counter = 0;
+    while($rows = mysqli_fetch_assoc($result)){
+        $total += 1;
+        $counter = $rows["ID"] + 0;
+    }
+    if (isset($_POST["ncn"])){
+        $lcin = "'" . $_POST . "'";
+        $lcid = ($luid * 1000) + $counter;
+        $result = mysqli_query($dbconfig,
+        "INSERT INTO
+        CIPHER(ID, NAME, UID)
+        VALUES ({$lcid}, {$lcin}, {$luid});")
+        or die("Database Error" . mysqli_error($dbconfig));
+    }
+    if (isset($_POST["ccn"])){
+
+    }
+    else {
+        $options = "";
+
+    }
     pageendProtocol();
 ?>
 <!DOCTYPE html>
@@ -34,11 +63,45 @@
             <li><a href="../.sys/logic/logout.php" class="logout">Log Out</a></li>
             <li><a href="../../docs/Enthereon Cipher Projects.pdf">About: Enthereon Cipher Projects</a></li>
             <li><a href="../../docs/Project Midnight.pdf">About: Project Midnight</a></li>
-            <li><a href="../../LICENSE">License</a></li>
+            <li><a href="../../docs/LICENSE">License</a></li>
         </ul>
         <div class="general">
             <div class="content">
                 <h1>Cipher Management<h2>
+                <p>Manage your ciphers here!</p>
+                <hr>
+                <h2>Create New Cipher<h2>
+                <form method="POST" action="">
+                    <input type="hidden" name="cnp">
+                    <label for="ncn">New Cipher Name</label>
+                    <br>
+                    <input type="text" name="ncn" placeholder="Cipher Name" required>
+                    <button type="submit" class="login">&rArr;</button>
+                    <?php
+                        if(isset($error_ncn)){
+                            echo "<br><p class='error'>{$ncn}</p>";
+                        }
+                    ?>
+                </form>
+                <hr>
+                <h2>Configure Cipher</h2>
+                <p>Select a ciphher &rArr; Select a configuration method &rArr; Do configuration</p>
+                <form>
+                    <label for="ccn">Cipher Name</label>
+                    <br>
+                    <?php
+                        if(isset($cur_cipher)){
+                            echo "<input type='text' name='ccn' value='{$cur_cipher}' readonly>";
+                        }
+                        else {
+                            echo "<select name='ccn' required>";
+                            echo $options;
+                            echo "</select>";
+                            echo "<button type='submit' class='login'>&rArr;</button>\n";
+                        }
+                    ?>
+                    <br>
+                </form>
             </div>
         </div>
     </body>

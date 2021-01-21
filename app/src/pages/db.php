@@ -85,7 +85,7 @@
             <li><a href="../.sys/logic/logout.php" class="logout">Log Out</a></li>
             <li><a href="../../docs/Enthereon Cipher Projects.pdf">About: Enthereon Cipher Projects</a></li>
             <li><a href="../../docs/Project Midnight.pdf">About: Project Midnight</a></li>
-            <li><a href="../../LICENSE">License</a></li>
+            <li><a href="../../docs/LICENSE">License</a></li>
         </ul>
         <div class="general">
             <div class="content">
@@ -96,7 +96,7 @@
                     <label for="query">Query</label>
                     <br>
                     <input type="text" name="query" placeholder="Database Query" required>
-                    <button type="submit" class="login">&rarr;</button>
+                    <button type="submit" class="login">&rArr;</button>
                 </form>
                 <?php
                     if(isset($to_print)){

@@ -61,7 +61,7 @@
             <li><a href="signup.php">Sign Up</a></li>
             <li><a href="../../docs/Enthereon Cipher Projects.pdf">About: Enthereon Cipher Projects</a></li>
             <li><a href="../../docs/Project Midnight.pdf">About: Project Midnight</a></li>
-            <li><a href="../../LICENSE">License</a></li>
+            <li><a href="../../docs/LICENSE">License</a></li>
         </ul>
         <div class="general">
             <div class="content">

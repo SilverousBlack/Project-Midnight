@@ -68,6 +68,7 @@ This represents the filesystem of Project Midnight. Refer to this section for in
 |   |   |   +---> OFL.txt
 |   |   +---> Enthereon Cipher Projects.md
 |   |   +---> Enthereon Cipher Projects.pdf
+|   |   +---> LICENSE
 |   |   +---> Project Midnight.md
 |   |   +---> Project Midnight.pdf
 |   |   +---> System Design.vsdx
@@ -136,7 +137,7 @@ This represents the filesystem of Project Midnight. Refer to this section for in
 
 This Software licensed with a **Enthereon Cipher Projects General License**.
 
-```txt
+```bash
 Enthereon Cipher Projects General License
 
 Copyright (c) 2020 Julian Caleb Segundo (SilverousBlack)
