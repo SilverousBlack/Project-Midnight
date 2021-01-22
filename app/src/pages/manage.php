@@ -12,14 +12,14 @@
     or die("Database Error: " . mysqli_error($dbconfig));
     $copy = $result;
     $total = 0;
-    $counter = 0;
+    $counter = 1;
     while($rows = mysqli_fetch_assoc($result)){
         $total += 1;
-        $counter = $rows["ID"] + 0;
+        $counter = ($rows["ID"] + 0) - ($luid * 1000);
     }
-    if (isset($_POST["ncn"])){
-        $lcin = "'" . $_POST . "'";
-        $lcid = ($luid * 1000) + $counter;
+    if (isset($_POST["cnp"])){
+        $lcin = "'" . $_POST["ncn"] . "'";
+        $lcid = ($luid * 1000) + $counter + 1;
         $result = mysqli_query($dbconfig,
         "INSERT INTO
         CIPHER(ID, NAME, UID)
